@@ -1,0 +1,22 @@
+version: "3.3"
+
+services:
+  # https://github.com/leonardomso/graphql-mongodb-server
+  mongodb:
+    container_name: ${COMPOSE_PROJECT_NAME}_mongodb
+    # restart: always
+    image: 'mongo:latest'
+    command: mongod --config /etc/mongod.conf
+    volumes:
+      - ./.docker/mongodb/config/mongod.conf:/etc/mongod.conf
+      - ./.docker/mongodb/initdb:/docker-entrypoint-initdb.d/
+      - ./.docker/mongodb/data:/data/db
+      - ./.docker/mongodb/logs:/var/log/mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
+      MONGO_INITDB_USER: ${MONGO_INITDB_USER}
+      MONGO_INITDB_PASS: ${MONGO_INITDB_PASS}
+    ports:
+      - "27017:27017"
