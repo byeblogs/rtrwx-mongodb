@@ -6,7 +6,7 @@ services:
     container_name: ${COMPOSE_PROJECT_NAME}_mongodb
     # restart: always
     image: 'mongo:latest'
-    command: mongod --config /etc/mongod.conf
+    # command: mongod --config /etc/mongod.conf
     volumes:
       - ./.docker/mongodb/config/mongod.conf:/etc/mongod.conf
       - ./.docker/mongodb/initdb:/docker-entrypoint-initdb.d/
